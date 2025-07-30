@@ -1,17 +1,23 @@
 import userModel from "../models/userModel.js";
-import FormData from "form-data";
 import axios from "axios";
+import FormData from "form-data";
 
 export const generateImage = async (req, res) => {
   try {
-    const { userId, prompt } = req.body;
-    const user = await userModel.findById(userId);
+    const { prompt } = req.body;
+    const userId = req.userId;
 
-    if (!user || !prompt) {
+    if (!userId || !prompt) {
       return res.json({ success: false, message: "Missing Details" });
     }
 
-    if (user.creditBalance == 0 || userModel.creditBalance < 0) {
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    if (user.creditBalance <= 0) {
       return res.json({
         success: false,
         message: "No Credit Balance",
@@ -27,6 +33,7 @@ export const generateImage = async (req, res) => {
       formData,
       {
         headers: {
+          ...formData.getHeaders(), // IMPORTANT for multipart/form-data
           "x-api-key": process.env.CLIPDROP_API,
         },
         responseType: "arraybuffer",
@@ -46,10 +53,8 @@ export const generateImage = async (req, res) => {
       creditBalance: user.creditBalance - 1,
       resultImage,
     });
-    
   } catch (error) {
-    console.log(error.message);
+    console.log("Image generation error:", error.message);
     res.json({ success: false, message: error.message });
   }
 };
-//4 44 21
