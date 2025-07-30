@@ -1,0 +1,1 @@
+Built a full-stack MERN application that allows users to generate AI-based images from text prompts using the ClipDrop API. Implemented JWT authentication, credit-based image generation, and dynamic image rendering with responsive React UI.
