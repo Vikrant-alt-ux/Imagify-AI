@@ -43,7 +43,6 @@ const AppContextProvider = (props) => {
   const value = {
     user,
     logout,
-
     loadCreditData,
     setUser,
     showLogin,
