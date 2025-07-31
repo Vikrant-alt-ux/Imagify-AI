@@ -8,7 +8,7 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
 
-   const url = "https://imagify-ai-tchi.onrender.com";
+  //  const url = "https://imagify-ai-tchi.onrender.com";
 
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
