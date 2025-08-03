@@ -11,7 +11,7 @@ const userAuth = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     if (decoded.id) {
-      req.userId = decoded.id; // ✅ Best practice: attach to req, not req.body
+      req.userId = decoded.id; 
       next();
     } else {
       return res.json({

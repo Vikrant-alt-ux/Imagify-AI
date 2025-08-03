@@ -33,7 +33,7 @@ export const generateImage = async (req, res) => {
       formData,
       {
         headers: {
-          ...formData.getHeaders(), // IMPORTANT for multipart/form-data
+          ...formData.getHeaders(), 
           "x-api-key": process.env.CLIPDROP_API,
         },
         responseType: "arraybuffer",
