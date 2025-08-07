@@ -4,7 +4,6 @@ import { AppContext } from "../context/AppContext";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "react-toastify";
-import React, { useEffect, useState } from "react";
 
 
 const Login = () => {
