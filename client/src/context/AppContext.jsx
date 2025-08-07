@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-
-
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -20,9 +18,12 @@ const AppContextProvider = (props) => {
 
   const loadCreditData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/user/credits", {
-        headers: { token },
-      });
+      const { data } = await axios.get(
+        "https://imagify-ai-tchi.onrender.com" + "/api/user/credits",
+        {
+          headers: { token },
+        }
+      );
 
       if (data.success) {
         setCredit(data.credits);
@@ -48,7 +49,7 @@ const AppContextProvider = (props) => {
         toast.error(data.message);
         loadCreditData();
         if (data.creditBalance === 0) {
-          navigate('/buy')
+          navigate("/buy");
         }
       }
     } catch (error) {
